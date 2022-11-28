@@ -6,7 +6,9 @@
             "email": "soundofpeace.bd@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "symfony/var-dumper": "^6.1"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
