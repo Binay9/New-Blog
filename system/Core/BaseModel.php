@@ -2,8 +2,8 @@
 
 namespace System\Core;
 
-use EmptyIterator;
 use System\DB\MySql;
+use System\Exceptions\DataNotLoadedException;
 
 abstract class BaseModel
 {
@@ -16,6 +16,8 @@ abstract class BaseModel
     protected $order = '';
     protected $offset = 0;
     protected $limit = null;
+    protected $new = true;
+    protected $related = [];
 
     public function __construct()
     {
@@ -75,7 +77,6 @@ abstract class BaseModel
     public function get()
     {
         $this->buildSelectQuery();
-
         $data = [];
 
         if ($this->db->query($this->sql)) {
@@ -85,7 +86,11 @@ abstract class BaseModel
         $return = [];
 
         foreach ($data as $item) {
-            $class = get_class($item);
+            if (!empty($this->related)) {
+                $class = get_class($this->related['obj']);
+            } else {
+                $class = get_class($this);
+            }
             $obj = new $class;
 
             foreach ($item as $key => $value) {
@@ -95,6 +100,7 @@ abstract class BaseModel
         }
 
         $this->resetVars();
+        $this->new = false;
 
         return $return;
     }
@@ -113,12 +119,104 @@ abstract class BaseModel
     public function load($id)
     {
         $obj = $this->where($this->pk, $id);
-        return $obj;
+
+        if ($obj) {
+            $data = $this->getDataFromObject($obj);
+
+            foreach ($data as $key => $value) {
+                $this->{$key} = $value;
+            }
+
+            $this->new = false;
+            unset($obj);
+        } else {
+            throw new DataNotLoadedException("Data with id:{$id} not found in model" . get_class($this) . ".");
+        }
     }
+
+    public function save()
+    {
+        $data = $this->getDataFromObject($this);
+        $set = [];
+
+        foreach ($data as $key => $value) {
+            $set[] = "{$key} = '{$value}'";
+        }
+
+        $set = implode(", ", $set);
+
+        if ($this->new) {
+            $this->sql = "INSERT INTO {$this->table} SET {$set}";
+        } else {
+            $this->sql = "UPDATE {$this->table} SET {$set} WHERE {$this->pk} = '{$this->{$this->pk}}'";
+        }
+
+        $this->db->query($this->sql);
+
+        if ($this->new) {
+            $this->{$this->pk} = $this->db->last_id();
+            $this->new = false;
+        }
+        $this->resetVars();
+
+        return true;
+    }
+
+    public function delete()
+    {
+        $this->sql = "DELETE FROM {$this->table} WHERE {$this->pk} = '{$this->{$this->pk}}'";
+        $this->db->query($this->sql);
+
+        $this->resetVars();
+        $data = $this->getDataFromObject($this);
+
+        foreach ($data as $key => $value) {
+            unset($this->{$key});
+        }
+        $this->new = true;
+
+        return true;
+    }
+
+    public function related($class_name, $fk, $location)
+    {
+        $obj = new $class_name;
+
+        $this->related = [
+            'obj' => $obj,
+            'fk' => $fk,
+            'location' => $location
+        ];
+
+        return $this;
+    }
+
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    public function getPk()
+    {
+        return $this->pk;
+    }
+
 
     private function buildSelectQuery()
     {
-        $this->sql = "SELECT {$this->select} FROM {$this->table}";
+        if (!empty($this->related)) {
+            $table = $this->related['obj']->getTable();
+
+            if ($this->related['location'] == 'child') {
+                $this->where($this->related['fk'], $this->{$this->pk});
+            } else {
+                $this->where($this->related['obj']->getPk(), $this->{$this->related['fk']});
+            }
+        } else {
+            $table = $this->table;
+        }
+
+        $this->sql = "SELECT {$this->select} FROM {$table}";
 
         if (!empty($this->conditions)) {
             $this->sql .= " WHERE {$this->conditions}";
@@ -141,5 +239,20 @@ abstract class BaseModel
         $this->order = '';
         $this->offset = 0;
         $this->limit = null;
+        $this->related = [];
+    }
+
+    private function getDataFromObject($obj)
+    {
+        $predefined = get_class_vars(get_class($obj));
+        $all = get_object_vars($obj);
+        $data = [];
+
+        foreach ($all as $key => $value) {
+            if (!key_exists($key, $predefined)) {
+                $data[$key] = $value;
+            }
+        }
+        return $data;
     }
 }

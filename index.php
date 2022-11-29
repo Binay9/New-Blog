@@ -3,4 +3,9 @@
 require "vendor/autoload.php";
 
 
-$db = new System\DB\MySql;
+echo "Hello";
+// $category = new \App\Models\Category;
+// $category->name = "Admin1";
+// $category->save();
+
+// dd($category);
