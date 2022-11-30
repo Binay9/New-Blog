@@ -1,11 +1,9 @@
 <?php
 
-require "vendor/autoload.php";
+define('BASEDIR', __DIR__);
 
+require BASEDIR . "/vendor/autoload.php";
 
-echo "Hello";
-// $category = new \App\Models\Category;
-// $category->name = "Admin1";
-// $category->save();
+$app = new \System\Core\SystemInit;
 
-// dd($category);
+$app->start();
