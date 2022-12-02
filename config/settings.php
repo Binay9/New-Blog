@@ -1,10 +1,11 @@
 <?php
 
 $config = [
-    'site_url' => 'http://localhost/mvc/',
+    'site_url' => 'www.mvc.tst/',
     'db_host' => 'localhost',
     'db_user' => 'admin',
-    'db_pass' => 'admin9090',
-    'db_name' => 'mvc',
-    'timezone' => 'Europe/Lisbon'
+    'db_pass' => 'Admin@9090',
+    'db_name' => 'blog101',
+    'timezone' => 'Europe/Lisbon',
+    'default_controller' => 'home'
 ];

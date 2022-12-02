@@ -2,7 +2,6 @@
 
 namespace System\DB;
 
-
 class MySql
 {
     protected $con = null;
