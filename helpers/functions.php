@@ -19,3 +19,10 @@ if (!function_exists('view')) {
         \System\Core\View::load($view, $data);
     }
 }
+
+if (!function_exists('url')) {
+    function url($uri = '')
+    {
+        return config('site_url') . $uri;
+    }
+}
