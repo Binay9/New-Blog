@@ -1,4 +1,5 @@
 <?php
+
 if (!function_exists('config')) {
     function config($key)
     {
@@ -9,5 +10,12 @@ if (!function_exists('config')) {
         } else {
             return false;
         }
+    }
+}
+
+if (!function_exists('view')) {
+    function view($view, $data = [])
+    {
+        \System\Core\View::load($view, $data);
     }
 }

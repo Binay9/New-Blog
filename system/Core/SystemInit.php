@@ -28,19 +28,19 @@ class SystemInit
             $parts = explode('/', $_SERVER['PATH_INFO']);
         }
 
-        if (!empty($parts) && isset($parts[1])) {
+        if (!empty($parts)) {
             $return['controller'] = ucfirst($parts[1]) . 'Controller';
         } else {
             $return['controller'] = ucfirst(config('default_controller')) . 'Controller';
         }
 
-        if (!empty($parts[2]) && isset($parts[2])) {
+        if (!empty($parts) && isset($parts[2]) && !empty($parts[2])) {
             $return['method'] = $parts[2];
         } else {
             $return['method'] = 'index';
         }
 
-        if (!empty($parts[3]) && isset($parts[3])) {
+        if (!empty($parts) && isset($parts[3]) && !empty($parts[3])) {
             $return['argument'] = $parts[3];
         } else {
             $return['argument'] = null;
@@ -51,15 +51,18 @@ class SystemInit
 
     private function loadController($parts)
     {
-        // dd($parts);
-        $class = 'App\Controllers\\' . $parts['controller'];
+        $class = "App\Controllers\\" . $parts['controller'];
         $obj = new $class;
 
-        dd($class, $obj);
-
         if ($obj instanceof BaseController) {
+
+            if (!is_null($parts['argument'])) {
+                $obj->{$parts['method']}($parts['argument']);
+            } else {
+                $obj->{$parts['method']}();
+            }
         } else {
-            throw new NotAControllerException("Class '{$class}' is not an instance of Base Controller class!");
+            throw new NotAControllerException("Class '{$class}' is not an instance of Base Controller!");
         }
     }
 }

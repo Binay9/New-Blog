@@ -21,7 +21,8 @@ class MySql
     public function query($sql)
     {
         $this->result = $this->con->prepare($sql);
-        $this->result->execute();
+
+        return $this->result->execute();
     }
 
     public function fetch()

@@ -5,6 +5,7 @@ namespace System\Core;
 use System\DB\MySql;
 use System\Exceptions\DataNotLoadedException;
 
+
 abstract class BaseModel
 {
     protected $table = '';
@@ -27,7 +28,6 @@ abstract class BaseModel
     public function select($columns)
     {
         $this->select = $columns;
-
         return $this;
     }
 
@@ -45,7 +45,6 @@ abstract class BaseModel
 
     public function orWhere($column, $value, $operator = "=")
     {
-
         $this->conditions .= " OR {$column} {$operator} '{$value}'";
 
         return $this;
@@ -118,11 +117,10 @@ abstract class BaseModel
 
     public function load($id)
     {
-        $obj = $this->where($this->pk, $id);
+        $obj = $this->where($this->pk, $id)->first();
 
         if ($obj) {
             $data = $this->getDataFromObject($obj);
-
             foreach ($data as $key => $value) {
                 $this->{$key} = $value;
             }
@@ -130,7 +128,7 @@ abstract class BaseModel
             $this->new = false;
             unset($obj);
         } else {
-            throw new DataNotLoadedException("Data with id:{$id} not found in model" . get_class($this) . ".");
+            throw new DataNotLoadedException("Data with id: '{$id}' not found in " . get_class($this) . ".");
         }
     }
 
@@ -253,6 +251,7 @@ abstract class BaseModel
                 $data[$key] = $value;
             }
         }
+
         return $data;
     }
 }
