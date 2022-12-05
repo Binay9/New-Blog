@@ -26,3 +26,27 @@ if (!function_exists('url')) {
         return config('site_url') . $uri;
     }
 }
+
+if (!function_exists('redirect')) {
+    function redirect($url)
+    {
+        header('location: ' . $url);
+        die;
+    }
+}
+
+if (!function_exists('logged_in')) {
+    function logged_in()
+    {
+        return isset($_SESSION['user']) && !empty($_SESSION['user']);
+    }
+}
+
+if (!function_exists('user')) {
+    function user()
+    {
+        $user = new \App\Models\Admin;
+        $user->load($_SESSION['user']);
+        return $user;
+    }
+}

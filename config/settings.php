@@ -5,7 +5,7 @@ $config = [
     'db_host' => 'localhost',
     'db_user' => 'admin',
     'db_pass' => 'Admin@9090',
-    'db_name' => 'blog101',
+    'db_name' => 'mvc',
     'timezone' => 'Europe/Lisbon',
     'default_controller' => 'home'
 ];
