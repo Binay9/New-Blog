@@ -57,7 +57,7 @@ class SystemInit
 
         if ($obj instanceof BaseController) {
 
-            if (!is_null($parts['argument'])) {
+            if (!is_null($parts['argument']) && !empty($parts['argument'])) {
                 $obj->{$parts['method']}($parts['argument']);
             } else {
                 $obj->{$parts['method']}();

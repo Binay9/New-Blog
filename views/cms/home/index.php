@@ -1,6 +1,7 @@
 <?php
 view('cms/includes/header.php');
 view('cms/includes/nav.php');
+view('cms/includes/messages.php');
 ?>
 
 <div class="row">

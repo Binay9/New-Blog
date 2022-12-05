@@ -33,17 +33,8 @@ class LoginController extends BaseController
             $_SESSION['user'] = $user->id;
             redirect(url('home'));
         } else {
-            $_SESSION['message'] = [
-                'content' => 'Incorrect Email or Password',
-                'type' => 'danger'
-            ];
+            set_message('Incorrect Email or Password.', 'danger');
             redirect(url('login'));
         }
     }
-
-    // public function out()
-    // {
-    //     unset($_SESSION['message']);
-    //     redirect(url('login'));
-    // }
 }

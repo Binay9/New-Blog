@@ -26,8 +26,8 @@
                             <?php echo user()->name; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end p-1 me-2">
-                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Change Password</a></li>
+                            <li><a class="dropdown-item" href="<?php echo url('profile/edit'); ?>">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="<?php echo url('password/edit'); ?>">Change Password</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

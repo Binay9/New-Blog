@@ -50,3 +50,34 @@ if (!function_exists('user')) {
         return $user;
     }
 }
+
+if (!function_exists('set_message')) {
+    function set_message($message, $type = 'success')
+    {
+        $_SESSION['message'] = [
+            'content' => $message,
+            'type' => $type
+        ];
+    }
+}
+
+if (!function_exists('get_message')) {
+    function get_message()
+    {
+        return $_SESSION['message'];
+    }
+}
+
+if (!function_exists('check_message')) {
+    function check_message()
+    {
+        return isset($_SESSION['message']) && !empty($_SESSION['message']);
+    }
+}
+
+if (!function_exists('clear_message')) {
+    function clear_message()
+    {
+        unset($_SESSION['message']);
+    }
+}

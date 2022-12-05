@@ -11,10 +11,7 @@ class LogoutController extends BaseController
     {
         unset($_SESSION['user']);
 
-        $_SESSION['message'] = [
-            'content' => 'Logged out successfully.',
-            'type' => 'warning'
-        ];
+        set_message('Logged out successfully.', 'warning');
 
         redirect(url('login'));
     }

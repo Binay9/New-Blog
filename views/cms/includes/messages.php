@@ -1,10 +1,15 @@
-<?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) : ?>
+<?php
+if (check_message()) :
+    $message = get_message();
+?>
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-<?php echo $_SESSION['message']['type']; ?>" role="alert">
-                <?php echo $_SESSION['message']['content']; ?>
+            <div class="alert alert-<?php echo $message['type']; ?>" role="alert">
+                <?php echo $message['content']; ?>
             </div>
         </div>
     </div>
-<?php unset($_SESSION['message']);
-endif; ?>
+<?php
+    clear_message();
+endif;
+?>

@@ -95,11 +95,12 @@ abstract class BaseModel
             foreach ($item as $key => $value) {
                 $obj->{$key} = $value;
             }
+            $obj->new = false;
             $return[] = $obj;
         }
 
         $this->resetVars();
-        $this->new = false;
+        // $this->new = false;
 
         return $return;
     }
@@ -124,7 +125,6 @@ abstract class BaseModel
             foreach ($data as $key => $value) {
                 $this->{$key} = $value;
             }
-
             $this->new = false;
             unset($obj);
         } else {
