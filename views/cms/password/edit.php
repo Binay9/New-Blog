@@ -8,7 +8,7 @@ view('cms/includes/nav.php');
         <div class="row">
             <div class="col-6 mx-auto ">
                 <?php view('cms/includes/messages.php'); ?>
-                <h2>Change Password</h2>
+                <h2 class="text-center">Change Password</h2>
 
                 <form action="<?php echo url('password/update'); ?>" method="POST">
                     <div class="mb-3">

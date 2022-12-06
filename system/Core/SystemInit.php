@@ -15,9 +15,14 @@ class SystemInit
 
     public function start()
     {
-        $parts = $this->getUrlParts();
+        try {
+            $parts = $this->getUrlParts();
+            $this->loadController($parts);
+        } catch (\Exception $e) {
 
-        $this->loadController($parts);
+            echo '<h3>' . $e->getMessage() . '</h3>';
+            echo $e->getFile() . ':' . $e->getLine();
+        }
     }
 
     private function getUrlParts()

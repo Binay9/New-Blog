@@ -1,14 +1,14 @@
 <?php
 view('cms/includes/header.php');
 view('cms/includes/nav.php');
-view('cms/includes/messages.php');
 ?>
 
 <div class="row">
     <div class="col-12 bg-white my-1 py-4 px-3">
         <div class="row mb-2">
             <div class="col">
-                <h2>Admin</h2>
+                <h2>Admins</h2>
+                <?php view('cms/includes/messages.php'); ?>
             </div>
             <div class="col-auto">
                 <a href="<?php echo url('admins/create'); ?>" class="btn btn-secondary">Add Admin</a>
@@ -52,7 +52,7 @@ view('cms/includes/messages.php');
                                     </td>
                                     <td>
                                         <a href="<?php echo url('admins/edit/' . $admin->id); ?>" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="<?php echo url('admins/destroy/' . $admin->id); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="<?php echo url('admins/destroy/' . $admin->id); ?>" class="btn btn-danger btn-sm delete">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

@@ -25,7 +25,7 @@ view('cms/includes/header.php');
                         <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password here" required>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-secondary" type="submit">Login</button>
+                        <button class="btn btn-secondary">Login</button>
                     </div>
                 </form>
             </div>
