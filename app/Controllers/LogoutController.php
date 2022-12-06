@@ -7,6 +7,11 @@ use System\Core\BaseController;
 class LogoutController extends BaseController
 {
 
+    public function __construct()
+    {
+        $this->checkLogin();
+    }
+
     public function index()
     {
         unset($_SESSION['user']);

@@ -9,9 +9,7 @@ class ProfileController extends BaseController
 
     public function __construct()
     {
-        if (!logged_in()) {
-            redirect(url('login'));
-        }
+        $this->checkLogin();
     }
 
     public function index()
@@ -39,7 +37,6 @@ class ProfileController extends BaseController
         $user->save();
 
         set_message('Profile updated');
-
         redirect(url('profile/edit'));
     }
 }

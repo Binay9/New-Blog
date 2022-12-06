@@ -7,9 +7,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Admin</a>
-                    </li>
+                    <?php if (user()->type == 'admin') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?php echo url('admins'); ?>">Admin</a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Categories</a>
                     </li>

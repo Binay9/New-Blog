@@ -10,9 +10,7 @@ class PasswordController extends BaseController
 
     public function __construct()
     {
-        if (!logged_in()) {
-            redirect(url('login'));
-        }
+        $this->checkLogin();
     }
 
     public function index()
