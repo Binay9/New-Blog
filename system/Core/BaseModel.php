@@ -192,6 +192,10 @@ abstract class BaseModel
 
         $pages = ceil($total / $limit);
 
+        if ($pages < 1) {
+            $pages = 1;
+        }
+
         if ($pageno > $pages) {
             $pageno = $pages;
         }
