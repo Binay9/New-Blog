@@ -16,7 +16,7 @@ view('cms/includes/nav.php');
         </div>
         <div class="row">
             <div class="col-12">
-                <?php if (count($admins) > 0) : ?>
+                <?php if (count($data) > 0) : ?>
                     <table class="table table-spriped table-hover table-sm">
                         <thead>
                             <tr>
@@ -30,7 +30,7 @@ view('cms/includes/nav.php');
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($admins as $admin) : ?>
+                            <?php foreach ($data as $admin) : ?>
                                 <tr>
                                     <td>
                                         <?php echo $admin->name; ?>
@@ -64,6 +64,7 @@ view('cms/includes/nav.php');
             </div>
         </div>
 
+        <?php view('cms/includes/pagination.php', $pagination); ?>
     </div>
 </div>
 

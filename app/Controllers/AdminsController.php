@@ -17,8 +17,8 @@ class AdminsController extends BaseController
     public function index()
     {
         $admin = new Admin;
-        $admins = $admin->where('type', 'author')->get();
-        view('cms/admins/index.php', compact('admins'));
+        $admins = $admin->where('type', 'author')->paginate(2);
+        view('cms/admins/index.php', $admins);
     }
 
     public function create()

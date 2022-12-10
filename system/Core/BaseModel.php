@@ -176,6 +176,58 @@ abstract class BaseModel
         return true;
     }
 
+    public function paginate($limit = 10)
+    {
+        if (isset($_GET['page']) && !empty($_GET['page'])) {
+            $pageno = $_GET['page'];
+        } else {
+            $pageno = 1;
+        }
+
+        $this->buildSelectQuery();
+
+        $this->db->query($this->sql);
+
+        $total = $this->db->num_rows();
+
+        $pages = ceil($total / $limit);
+
+        if ($pageno > $pages) {
+            $pageno = $pages;
+        }
+
+        $offset = ($limit * $pageno) - $limit;
+
+        $this->offset($offset);
+        $this->limit($limit);
+
+        $data = $this->get();
+
+        $parts = [];
+
+        if (isset($_SERVER['PATH_INFO'])) {
+            $parts = explode('/', $_SERVER['PATH_INFO']);
+        }
+
+        if (!empty($parts)) {
+            $path = url($parts[1]);
+        } else {
+            $path = url();
+        }
+
+        return [
+            'pagination' => [
+                'pageno' => $pageno,
+                'pages' => $pages,
+                'path' => $path,
+                'offset' => $offset,
+                'limit' => $limit,
+                'total' => $total,
+            ],
+            'data' => $data
+        ];
+    }
+
     public function related($class_name, $fk, $location)
     {
         $obj = new $class_name;

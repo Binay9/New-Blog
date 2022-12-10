@@ -35,10 +35,18 @@ class SystemInit
         }
 
         if (!empty($parts)) {
-            $return['controller'] = ucfirst($parts[1]) . 'Controller';
+            $checkFile = "app/Controllers/" . ucfirst($parts[1]) . 'Controller.php';
+
+            if (file_exists($checkFile)) {
+                $return['controller'] = ucfirst($parts[1]) . 'Controller';
+            } else {
+
+                $return['controller'] = ucfirst(config('default_controller')) . 'Controller';
+            }
         } else {
             $return['controller'] = ucfirst(config('default_controller')) . 'Controller';
         }
+
 
         if (!empty($parts) && isset($parts[2]) && !empty($parts[2])) {
             $return['method'] = $parts[2];
@@ -58,6 +66,7 @@ class SystemInit
     private function loadController($parts)
     {
         $class = "App\Controllers\\" . $parts['controller'];
+
         $obj = new $class;
 
         if ($obj instanceof BaseController) {
