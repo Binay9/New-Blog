@@ -13,7 +13,7 @@ view('cms/includes/nav.php');
                 <form action="<?php echo url('admins/store'); ?>" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="name" name="name" id="name" class="form-control" required>
+                        <input type="text" name="name" id="name" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>

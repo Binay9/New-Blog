@@ -16,7 +16,7 @@
                         <a class="nav-link active" aria-current="page" href="<?php echo url('categories') ?>">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Articles</a>
+                        <a class="nav-link active" aria-current="page" href="<?php echo url('articles') ?>">Articles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Comments</a>

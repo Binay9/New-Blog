@@ -13,7 +13,7 @@ view('cms/includes/nav.php');
                 <form action="<?php echo url('categories/update/' . $category->id); ?>" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="name" name="name" id="name" value="<?php echo $category->name; ?>" class="form-control" required>
+                        <input type="text" name="name" id="name" value="<?php echo $category->name; ?>" class="form-control" required>
                     </div>
                     <div class=" mb-3">
                         <button class="btn btn-secondary" type="submit">Save</button>

@@ -20,4 +20,12 @@ abstract class BaseController
             redirect(url('home'));
         }
     }
+
+    protected function checkAuthor()
+    {
+        if (user()->type != 'author') {
+            set_message('Access denied', 'danger');
+            redirect(url('home'));
+        }
+    }
 }

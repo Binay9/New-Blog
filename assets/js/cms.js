@@ -23,4 +23,12 @@ $(document).ready(function () {
         }
     });
 
+    // $('#published_at').datetimepicker({
+    //     //put your config here
+    // });
+
+    $('#datetimepicker1').tempusDominus({
+        //put your config here
+    });
+
 }); 
