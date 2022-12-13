@@ -40,7 +40,30 @@ class ArticlesController extends BaseController
     {
         $this->checkAuthor();
 
-        view('cms/articles/index.php');
+        extract($_POST);
+
+        $article = new Article;
+
+        $article->name = $name;
+        $article->description = $description;
+        $article->category_id = $category_id;
+        $article->admin_id = user()->id;
+        $article->status = $status;
+
+        if (!empty($published_at)) {
+            $article->published_at = $published_at;
+        } else {
+            $article->published_at = null;
+        }
+
+        $article->created_at = date('Y-m-d H:i:s');
+        $article->updated_at = date('Y-m-d H:i:s');
+
+        $article->save();
+
+        set_message("Article saved.");
+
+        redirect(url('articles'));
     }
 
     public function edit($id)

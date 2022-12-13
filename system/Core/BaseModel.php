@@ -138,7 +138,12 @@ abstract class BaseModel
         $set = [];
 
         foreach ($data as $key => $value) {
-            $set[] = "{$key} = '{$value}'";
+
+            if (!is_null($value)) {
+                $set[] = "{$key} = '{$value}'";
+            } else {
+                $set[] = "{$key} = NULL";
+            }
         }
 
         $set = implode(", ", $set);

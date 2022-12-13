@@ -23,12 +23,11 @@ $(document).ready(function () {
         }
     });
 
-    // $('#published_at').datetimepicker({
-    //     //put your config here
-    // });
-
-    $('#datetimepicker1').tempusDominus({
-        //put your config here
+    $('#published_at').datetimepicker({
+        icons: {
+            time: "fa fa-clock",
+        },
+        format: 'YYYY-MM-DD HH:mm:ss'
     });
 
 }); 
