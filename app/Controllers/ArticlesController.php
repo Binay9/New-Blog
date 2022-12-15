@@ -46,18 +46,33 @@ class ArticlesController extends BaseController
 
         $article->name = $name;
         $article->description = $description;
-        $article->category_id = $category_id;
         $article->admin_id = user()->id;
-        $article->status = $status;
+        $article->published_at = !empty($published_at) ? $published_at : null;
+        $article->category_id = !empty($category_id) ? $category_id : 1;
+        $article->status = !empty($status) ? $status : 'draft';
 
-        if (!empty($published_at)) {
-            $article->published_at = $published_at;
-        } else {
-            $article->published_at = null;
-        }
+
+        // if (!empty($published_at)) {
+        //     $article->published_at = $published_at;
+        // } else {
+        //     $article->published_at = null;
+        // }
 
         $article->created_at = date('Y-m-d H:i:s');
         $article->updated_at = date('Y-m-d H:i:s');
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+            $file = $_FILES['image'];
+
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $filename = "img_" . date('miYHds') . '_' . rand(1000, 9999) . '.' . $ext;
+
+            move_uploaded_file($file['tmp_name'], BASEDIR . '/assets/images/' . $filename);
+            $article->image = $filename;
+        } else {
+            $article->image = null;
+        }
+
 
         $article->save();
 

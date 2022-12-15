@@ -23,6 +23,11 @@ view('cms/includes/nav.php');
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Image</th>
+                                <th>Status</th>
+                                <th>Published At</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
@@ -33,6 +38,27 @@ view('cms/includes/nav.php');
                                 <tr>
                                     <td>
                                         <?php echo $article->name; ?>
+                                    </td>
+
+                                    <?php $author  = $article->admin()->first(); ?>
+                                    <td>
+                                        <?php echo $author->name; ?>
+                                    </td>
+
+                                    <?php $category  = $article->category()->first(); ?>
+                                    <td>
+                                        <?php echo $category->name; ?>
+                                    </td>
+                                    <td>
+                                        <?php if (!empty($article->image)) : ?>
+                                            <img src="<?php echo url('assets/images/' . $article->image); ?>" class="img-fluid small">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo ucfirst($article->status); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo !empty($article->published_at) ? $article->published_at : 'Not published yet.'; ?>
                                     </td>
                                     <td>
                                         <?php echo $article->created_at; ?>

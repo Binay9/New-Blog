@@ -1,3 +1,7 @@
 body {
     background-color: #dfdfdfea;
 }
+
+img.small {
+    max-height: 50px;
+}

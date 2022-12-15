@@ -10,7 +10,7 @@ view('cms/includes/nav.php');
                 <?php view('cms/includes/messages.php'); ?>
                 <h2 class="text-center">Add Article</h2>
 
-                <form action="<?php echo url('article/store'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?php echo url('articles/store'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" id="name" class="form-control" required>
@@ -26,7 +26,7 @@ view('cms/includes/nav.php');
                     <div class="mb-3">
                         <label for="category_id" class="form-label">Categories</label>
                         <select class="form-select" name="category_id" id="category_id" required>
-                            <option selected> Select Category</option>
+                            <option selected disabled hidden> Select Category</option>
                             <?php foreach ($categories as $category) : ?>
                                 <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
                             <?php endforeach; ?>
@@ -38,9 +38,9 @@ view('cms/includes/nav.php');
                     </div>
 
                     <div class="mb-3">
-                        <label for="status">Status</label>
+                        <label for="status" class="form-label">Status</label>
                         <select class="form-select" name="status" id="status" required>
-                            <option selected>Set Status</option>
+                            <option selected disabled hidden>Set Status</option>
                             <option value="draft">*** Draft ***</option>
                             <option value="pending">*** PUBLISH ***</option>
                         </select>
