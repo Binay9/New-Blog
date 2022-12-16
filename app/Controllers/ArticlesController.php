@@ -33,8 +33,10 @@ class ArticlesController extends BaseController
         $category = new Category;
         $categories = $category->select('id, name')->get();
 
+
         view('cms/articles/create.php', compact('categories'));
     }
+
 
     public function store()
     {
@@ -44,19 +46,17 @@ class ArticlesController extends BaseController
 
         $article = new Article;
 
+        if (!empty($category_id) && isset($category_id)) {
+            $article->category_id = $category_id;
+        } else {
+            set_message('Please select a category', 'warning');
+            redirect(url('articles/create'));
+        }
         $article->name = $name;
         $article->description = $description;
         $article->admin_id = user()->id;
-        $article->published_at = !empty($published_at) ? $published_at : null;
-        $article->category_id = !empty($category_id) ? $category_id : 1;
-        $article->status = !empty($status) ? $status : 'draft';
-
-
-        // if (!empty($published_at)) {
-        //     $article->published_at = $published_at;
-        // } else {
-        //     $article->published_at = null;
-        // }
+        !empty($status) && isset($status) ? $article->status = $status : 'draft';
+        !empty($published_at) && isset($published_at) ? $article->published_at = $published_at : null;
 
         $article->created_at = date('Y-m-d H:i:s');
         $article->updated_at = date('Y-m-d H:i:s');
@@ -83,7 +83,16 @@ class ArticlesController extends BaseController
 
     public function edit($id)
     {
-        view('cms/articles/index.php');
+        $article = new Article;
+        $article->load($id);
+
+        $this->checkAccess($article);
+
+        $category = new Category;
+        $categories = $category->select('id, name')->get();
+
+
+        view('cms/articles/edit.php', compact('article', 'categories'));
     }
 
     public function update($id)
@@ -94,5 +103,14 @@ class ArticlesController extends BaseController
     public function destroy($id)
     {
         view('cms/articles/index.php');
+    }
+
+    private function checkAccess($article)
+    {
+        if (user()->id != $article->admin_id && user()->type != 'admin') {
+            set_message('Access Denied.', 'danger');
+
+            redirect(url('article'));
+        }
     }
 }

@@ -58,7 +58,7 @@ view('cms/includes/nav.php');
                                         <?php echo ucfirst($article->status); ?>
                                     </td>
                                     <td>
-                                        <?php echo !empty($article->published_at) ? $article->published_at : 'Not published yet.'; ?>
+                                        <?php echo !empty($article->published_at) ? $article->published_at : '- N/A -'; ?>
                                     </td>
                                     <td>
                                         <?php echo $article->created_at; ?>
@@ -67,8 +67,8 @@ view('cms/includes/nav.php');
                                         <?php echo $article->updated_at; ?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo url('article/edit/' . $article->id); ?>" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="<?php echo url('article/destroy/' . $article->id); ?>" class="btn btn-danger btn-sm delete">Delete</a>
+                                        <a href="<?php echo url('articles/edit/' . $article->id); ?>" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="<?php echo url('articles/destroy/' . $article->id); ?>" class="btn btn-danger btn-sm delete">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
