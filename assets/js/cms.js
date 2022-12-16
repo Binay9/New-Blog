@@ -27,7 +27,8 @@ $(document).ready(function () {
         icons: {
             time: "fa fa-clock",
         },
-        format: 'YYYY-MM-DD HH:mm:ss'
+        format: 'YYYY-MM-DD HH:mm:ss',
+        defaultDate: $('#published_at').data('default')
     });
 
 }); 

@@ -37,7 +37,7 @@ view('cms/includes/nav.php');
                     </div>
                     <div class="mb-3">
                         <label for="published_at" class="form-label">Publish Date</label>
-                        <input name="published_at" id="published_at" type="text" class="form-control datetimepicker-input" data-target="#published_at" data-toggle="datetimepicker">
+                        <input name="published_at" id="published_at" type="text" class="form-control datetimepicker-input" data-default="<?php echo $article->published_at; ?>" data-target="#published_at" data-toggle="datetimepicker">
                     </div>
 
                     <div class="mb-3">
@@ -50,8 +50,8 @@ view('cms/includes/nav.php');
                                 <option value="draft" <?php echo $article->status == 'draft' ? 'selected' : ''; ?>>*** Draft ***</option>
                                 <option value="pending" <?php echo $article->status == 'pending' ? 'selected' : ''; ?>>*** PUBLISH ***</option>
                             <?php else : ?>
-                                <option value="pending" <?php echo $article->status == 'pending' ? 'selected' : ''; ?>>Pending</option>
-                                <option value="published" <?php echo $article->status == 'published' ? 'selected' : ''; ?>>Published</option>
+                                <option value="pending" <?php echo $article->status == 'pending' ? 'selected' : ''; ?>>*** PENDING ***</option>
+                                <option value="published" <?php echo $article->status == 'published' ? 'selected' : ''; ?>>*** PUBLISH ***</option>
 
                             <?php endif; ?>
 

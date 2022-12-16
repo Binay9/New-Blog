@@ -34,7 +34,7 @@ view('cms/includes/nav.php');
                     </div>
                     <div class="mb-3">
                         <label for="published_at" class="form-label">Publish Date</label>
-                        <input name="published_at" id="published_at" type="text" class="form-control datetimepicker-input" data-target="#published_at" data-toggle="datetimepicker">
+                        <input name="published_at" id="published_at" type="text" class="form-control datetimepicker-input" data-target="#published_at" data-default="<?php echo date('Y-m-d H:i:s'); ?>" data-toggle="datetimepicker">
                     </div>
 
                     <div class="mb-3">

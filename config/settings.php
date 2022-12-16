@@ -7,5 +7,5 @@ $config = [
     'db_pass' => 'Admin@9090',
     'db_name' => 'mvc',
     'timezone' => 'Europe/Lisbon',
-    'default_controller' => 'home'
+    'default_controller' => 'pages'
 ];

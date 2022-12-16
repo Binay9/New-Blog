@@ -97,20 +97,81 @@ class ArticlesController extends BaseController
 
     public function update($id)
     {
-        view('cms/articles/index.php');
+        $article = new Article;
+        $article->load($id);
+
+        $this->checkAccess($article);
+
+        extract($_POST);
+
+        if (!empty($category_id) && isset($category_id)) {
+            $article->category_id = $category_id;
+        } else {
+            set_message('Please select a category', 'warning');
+            redirect(url('articles/create'));
+        }
+        $article->name = $name;
+        $article->description = $description;
+        !empty($status) && isset($status) ? $article->status = $status : 'draft';
+        $article->updated_at = date('Y-m-d H:i:s');
+
+        if (!empty($published_at) && isset($published_at)) {
+            $article->published_at = $published_at;
+        } else {
+            if ($status == 'published') {
+                $article->published_at = date('Y-m-d H:i:s');
+            } else {
+                $article->published_at = null;
+            }
+        }
+
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+            $file = $_FILES['image'];
+
+            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $filename = "img_" . date('miYHds') . '_' . rand(1000, 9999) . '.' . $ext;
+
+            move_uploaded_file($file['tmp_name'], BASEDIR . '/assets/images/' . $filename);
+
+            if (!empty($article->image)) {
+                @unlink(BASEDIR . '/assets/images/' . $article->image);
+            }
+
+            $article->image = $filename;
+        }
+
+        $article->save();
+
+        set_message("Article updated.");
+
+        redirect(url('articles'));
     }
 
     public function destroy($id)
     {
-        view('cms/articles/index.php');
+        $article = new Article;
+        $article->load($id);
+
+        $this->checkAccess($article);
+
+        if (!empty($article->image)) {
+            @unlink(BASEDIR . '/assets/images/' . $article->image);
+        }
+
+        $article->delete();
+
+        set_message('Article removed.');
+
+        redirect(url('articles'));
     }
+
 
     private function checkAccess($article)
     {
         if (user()->id != $article->admin_id && user()->type != 'admin') {
             set_message('Access Denied.', 'danger');
 
-            redirect(url('article'));
+            redirect(url('articles'));
         }
     }
 }
