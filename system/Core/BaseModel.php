@@ -50,7 +50,7 @@ abstract class BaseModel
         return $this;
     }
 
-    public function order($column, $direction = 'ASC')
+    public function orderBy($column, $direction = 'ASC')
     {
         if (empty($order)) {
             $this->order = "{$column} {$direction}";
