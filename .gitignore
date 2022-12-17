@@ -2,4 +2,7 @@
 /config/settings.php
 config/settings.php
 
+/assets/images
+/images
+
 /vendor
