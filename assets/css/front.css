@@ -5,4 +5,40 @@ body {
 .site-name {
     font-size: 35px;
     font-weight: bold;
+    color: rgb(66, 68, 68);
+}
+
+.site-name:hover,
+.site-name:link,
+.site-name:focus {
+    text-decoration: none;
+    color: rgb(66, 68, 68);
+}
+
+.top-article-title {
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.top-article-info {
+    font-size: 14px;
+    color: #9c9898;
+    margin-right: 10px;
+}
+
+.footer a {
+    color: #e4e4e4;
+}
+
+.footer a:hover,
+.footer a:link,
+.footer a:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-icon {
+    font-size: xx-large;
+    margin-right: 4px;
 }
