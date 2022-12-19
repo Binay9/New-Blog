@@ -4,5 +4,6 @@ config/settings.php
 
 /assets/images
 /images
+/assets
 
 /vendor

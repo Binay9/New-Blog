@@ -17,6 +17,15 @@ class PagesController extends BaseController
             ->orderBy('published_at', 'DESC')
             ->first();
 
-        view('front/pages/index.php', compact('topArticle'));
+        $articles = $article->where('status', 'published')
+            ->where('published_at', date('Y-m-d H:i:s'), '<=')
+            ->select('id, name, image')
+            ->limit(8)
+            ->offset(1)
+            ->orderBy('published_at', 'DESC')
+            ->get();
+
+
+        view('front/pages/index.php', compact('topArticle', 'articles'));
     }
 }

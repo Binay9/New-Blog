@@ -43,7 +43,7 @@
                                     foreach ($category as $cat) :
                                     ?>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#"><?php echo $cat->name; ?></a>
+                                            <a class="nav-link" href="<?php echo url('category/show/' . $cat->id); ?>"><?php echo $cat->name; ?></a>
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>

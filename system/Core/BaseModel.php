@@ -212,14 +212,10 @@ abstract class BaseModel
 
         $data = $this->get();
 
-        $parts = [];
-
-        if (isset($_SERVER['PATH_INFO'])) {
+        if (isset($_SERVER['PATH_INFO']) && !empty($_SERVER['PATH_INFO'])) {
             $parts = explode('/', $_SERVER['PATH_INFO']);
-        }
-
-        if (!empty($parts)) {
-            $path = url($parts[1]);
+            unset($parts[0]);
+            $path = url(implode('/', $parts));
         } else {
             $path = url();
         }

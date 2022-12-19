@@ -42,3 +42,10 @@ body {
     font-size: xx-large;
     margin-right: 4px;
 }
+
+.img-thumb {
+    height: 170px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
