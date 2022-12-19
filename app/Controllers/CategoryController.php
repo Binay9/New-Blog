@@ -10,7 +10,7 @@ class CategoryController extends BaseController
 
     public function index()
     {
-        // redirect(url(''))
+        redirect(config('site_url'));
     }
 
     public function show($id)

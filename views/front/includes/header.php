@@ -22,8 +22,8 @@
                         <a class="site-name" href="<?php echo url(); ?>">NewsBlog</a>
                     </div>
                     <div class="col-4 pt-2">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search">
+                        <form action="<?php echo url('search'); ?>" class="d-flex" role="search" method="GET">
+                            <input class="form-control me-2" type="search" name="q" placeholder="Search">
                             <button class="btn btn-outline-secondary" type="submit">Search</button>
                         </form>
                     </div>

@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-12 my-3">
-        <h3><?php echo $category->name ?></h3>
+        <h3>Found '<?php echo ($pagination['total']); ?>' Search results for : '<?php echo $_GET['q'] ?>'</h3>
     </div>
 
     <div class="col-12 mb-3">

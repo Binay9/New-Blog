@@ -1,4 +1,22 @@
 <?php if ($pages > 1) : ?>
+    <?php
+    if (!empty($query)) {
+        $qry = [];
+
+        foreach ($query as $key => $value) {
+            $qry[] = $key . '=' . $value;
+        }
+
+        $qry[] = 'page=';
+
+        $qry = '?' . implode('&', $qry);
+    } else {
+        $qry = '?page=';
+    }
+    ?>
+
+
+
     <div class="row mt-4">
         <div class="col-12">
             <nav>
@@ -10,7 +28,7 @@
                         </li>
                     <?php else : ?>
                         <li class="page-item">
-                            <a class="page-link" href="<?php echo $path . '?page=' . ($pageno - 1); ?>">Previous</a>
+                            <a class="page-link" href="<?php echo $path . $qry . ($pageno - 1); ?>">Previous</a>
                         </li>
                     <?php endif; ?>
 
@@ -21,7 +39,7 @@
                             </li>
                         <?php else : ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?php echo $path . '?page=' . $i; ?>"><?php echo $i; ?></a>
+                                <a class="page-link" href="<?php echo $path . $qry . $i; ?>"><?php echo $i; ?></a>
                             </li>
                         <?php endif; ?>
                     <?php endfor; ?>
@@ -32,7 +50,7 @@
                         </li>
                     <?php else : ?>
                         <li class="page-item">
-                            <a class="page-link" href="<?php echo $path . '?page=' . ($pageno + 1); ?>">Next</a>
+                            <a class="page-link" href="<?php echo $path . $qry  . ($pageno + 1); ?>">Next</a>
                         </li>
                     <?php endif; ?>
                 </ul>

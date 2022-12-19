@@ -31,7 +31,7 @@
                         ?>
                     </div>
                     <div class="col-12">
-                        <a href="#" class="btn btn-secondary btn-sm">Read More</a>
+                        <a href="<?php echo url('post/show/' . $topArticle->id); ?>" class="btn btn-secondary btn-sm">Read More</a>
                     </div>
 
                 </div>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="col-12 text-center">
-                            <a href="<?php url($article->id) ?>"> <?php echo $article->name; ?> </a>
+                            <a href="<?php echo url('post/show/' . $article->id); ?>"> <?php echo $article->name; ?> </a>
                         </div>
                     </div>
                 </div>

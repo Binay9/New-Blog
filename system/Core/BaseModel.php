@@ -220,6 +220,21 @@ abstract class BaseModel
             $path = url();
         }
 
+        $query = [];
+
+        if (!empty($_SERVER['QUERY_STRING'])) {
+            $parts = explode('&', $_SERVER['QUERY_STRING']);
+
+            foreach ($parts as $value) {
+                $d = explode('=', $value);
+                $query[$d[0]] = urldecode($d[1]);
+            }
+
+            if (isset($query['page'])) {
+                unset($query['page']);
+            }
+        }
+
         return [
             'pagination' => [
                 'pageno' => $pageno,
@@ -228,6 +243,7 @@ abstract class BaseModel
                 'offset' => $offset,
                 'limit' => $limit,
                 'total' => $total,
+                'query' => $query
             ],
             'data' => $data
         ];
