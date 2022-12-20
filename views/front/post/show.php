@@ -108,7 +108,7 @@
                                             <?php echo nl2br($comment->comment); ?>
                                         </div>
                                         <div class="col-12">
-                                            <small>
+                                            <small class="bg-secondary rounded p-1 text-white">
                                                 Posted By: <?php echo $comment->name; ?> (<?php echo $comment->email; ?>) on <?php echo date('j M Y h:i A', strtotime($comment->created_at));  ?>
                                             </small>
 
@@ -134,16 +134,39 @@
             </div>
 
             <div class="col-5">
-                <div class="row">
+
+                <div class="row mx-3">
                     <div class="col-12">
+                        <?php if (!empty($related)) : ?>
+                            <div class="row">
+                                <div class="col-12 my-2">
+                                    <h3>Related Articles</h3>
+                                </div>
+                            </div>
 
+                            <div class="row border rounded">
+                                <?php foreach ($related as $post) : ?>
+                                    <div class="col-12 m-3">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <?php $image =  !empty($post->image) ? $post->image : 'default-img.jpeg' ?>
+                                                <div class="img-thumb small img-fluid " style="background-image: url(<?php echo url('assets/images/' . $image); ?>)">
+                                                </div>
+                                            </div>
+                                            <div class="col-7">
+                                                <a href="<?php echo url('post/show/' . $post->id); ?>"> <?php echo $post->name; ?> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                     </div>
-
                 </div>
+
+            <?php endif; ?>
+
             </div>
-
         </div>
-
     </div>
 </div>
 

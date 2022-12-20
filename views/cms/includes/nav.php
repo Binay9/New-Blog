@@ -13,14 +13,16 @@
                         </li>
                     <?php endif; ?>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?php echo url('categories') ?>">Categories</a>
+                        <a class="nav-link active" aria-current="page" href="<?php echo url('categories'); ?>">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?php echo url('articles') ?>">Articles</a>
+                        <a class="nav-link active" aria-current="page" href="<?php echo url('articles'); ?>">Articles</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Comments</a>
-                    </li>
+                    <?php if (user()->type == 'admin') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?php echo url('comments'); ?>">Comments</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav pe-2">
                     <li class="nav-item">

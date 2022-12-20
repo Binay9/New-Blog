@@ -21,7 +21,16 @@ class PostController extends BaseController
 
         $comments = $article->comments()->get();
 
-        view('front/post/show.php', compact('article', 'comments'));
+        $post = new Article;
+        $related = $post->where('category_id', $article->category_id)
+            ->where('id', $article->id, '!=')
+            ->where('status', 'published')
+            ->where('published_at', date('Y-m-d H:i:s'), '<=')
+            ->select('id, name, image')
+            ->limit(4)
+            ->get();
+
+        view('front/post/show.php', compact('article', 'comments', 'related'));
     }
 
     public function comment($id)
