@@ -1,9 +1,11 @@
 /config
 /config/settings.php
 config/settings.php
+settings.php
 
-/assets/images
 /images
-/assets
+/assets/images
+images
+
 
 /vendor

@@ -18,10 +18,10 @@
             <div class="col-12">
 
                 <div class="row my-3">
-                    <div class="col me-auto">
+                    <div class="col-sm-auto text-center">
                         <a class="site-name" href="<?php echo url(); ?>">NewsBlog</a>
                     </div>
-                    <div class="col-4 pt-2">
+                    <div class="col-lg-4 col-md-5 col-sm-6 pt-2 ms-auto">
                         <form action="<?php echo url('search'); ?>" class="d-flex" role="search" method="GET">
                             <input class="form-control me-2" type="search" name="q" placeholder="Search">
                             <button class="btn btn-outline-secondary" type="submit">Search</button>

@@ -2,7 +2,7 @@
     <div class="col-12 bg-secondary text-white py-3 footer">
         <div class="row">
 
-            <div class="col-4">
+            <div class="col-md-4 text-md-start text-center py-md-0 py-2">
                 <div class="row">
                     <div class="col-12">
                         <a class="site-name" href="<?php echo url(); ?>">NewsBlog</a>
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-md-4 text-md-start text-center py-md-0 py-2">
                 <div class="row">
                     <div class="col-12">
                         <h4>Find Us On</h4>
@@ -29,9 +29,9 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-md-4 py-md-0 py-2">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 text-md-start text-center">
                         <h4>Contact Us</h4>
                     </div>
                     <div class="col-12">

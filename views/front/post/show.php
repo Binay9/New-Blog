@@ -50,7 +50,7 @@
 
         <div class="row">
 
-            <div class="col-7">
+            <div class="col-md-7">
 
                 <div class="row">
                     <div class="col-12">
@@ -133,11 +133,16 @@
 
             </div>
 
-            <div class="col-5">
+            <div class="col-md-5">
 
                 <div class="row mx-3">
                     <div class="col-12">
                         <?php if (!empty($related)) : ?>
+                            <div class="row">
+                                <div class="col-12 d-md-none d-flex ">
+                                    <hr>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-12 my-2">
                                     <h3>Related Articles</h3>
@@ -148,12 +153,12 @@
                                 <?php foreach ($related as $post) : ?>
                                     <div class="col-12 m-3">
                                         <div class="row">
-                                            <div class="col-5">
+                                            <div class="col-lg-7 col-md-8 col-6">
                                                 <?php $image =  !empty($post->image) ? $post->image : 'default-img.jpeg' ?>
                                                 <div class="img-thumb small img-fluid " style="background-image: url(<?php echo url('assets/images/' . $image); ?>)">
                                                 </div>
                                             </div>
-                                            <div class="col-7">
+                                            <div class="col-lg-5 col-md-4 col-6">
                                                 <a href="<?php echo url('post/show/' . $post->id); ?>"> <?php echo $post->name; ?> </a>
                                             </div>
                                         </div>

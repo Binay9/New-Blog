@@ -9,12 +9,12 @@
         </div>
         <div class="row">
             <?php if (!empty($topArticle->image)) : ?>
-                <div class="col-6">
+                <div class="col-md-6">
                     <img src="<?php echo url('assets/images/' . $topArticle->image); ?>" class="mx-auto d-block img-thumbnail img-fluid">
                 </div>
             <?php endif; ?>
 
-            <div class="col">
+            <div class="col mt-md-0 mt-3">
                 <div class="row">
                     <div class="col-12 pb-2">
                         <?php $admin = $topArticle->admin()->select('name')->first(); ?>
@@ -53,7 +53,7 @@
         <div class="row">
 
             <?php foreach ($articles as $article) : ?>
-                <div class="col-3 mb-3">
+                <div class="col-lg-3 col-md-4 col-6 mb-3">
                     <div class="row">
                         <div class="col-12">
                             <?php $image =  !empty($article->image) ? $article->image : 'default-img.jpeg' ?>

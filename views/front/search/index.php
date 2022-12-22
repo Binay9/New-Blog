@@ -9,7 +9,7 @@
         <div class="row">
 
             <?php foreach ($data as $article) : ?>
-                <div class="col-3 mb-3">
+                <div class="col-lg-3 col-md-4 col-6 mb-3">
                     <div class="row">
                         <div class="col-12">
                             <?php $image =  !empty($article->image) ? $article->image : 'default-img.jpeg' ?>
